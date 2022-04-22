@@ -50,3 +50,21 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# uvision related
+startup_TM4C123.s
+startup.s
+system_TM4C123.c
+main.c
+*.uvproj
+*.crf
+*.htm
+*.lst
+*.lnp
+*.map
+*.dep
+*.axf
+*.iex
+*.bak
+*.future
+*.uvopt
