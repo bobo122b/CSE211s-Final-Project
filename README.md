@@ -8,7 +8,7 @@ This is our CSE211s final project. It's a microwave interface using Ti's tiva [T
 | Ahmed Hamdy Muhammed | 1900206 |
 | Ahmed Shafeek Shafeek | 1900112 |
 | Mohamed Emad Mostafa | 1900304 |
-| Abdelrahman Sahmeh |  | 1900738
+| Abdelrahman Sahmeh | 1900738 |
 
 ## Description of files
 
