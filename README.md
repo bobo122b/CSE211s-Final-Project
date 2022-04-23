@@ -1,6 +1,7 @@
 # CSE211s Final Project
 
-This is our CSE211s final project. It's a microwave interface using Ti's tiva [TM4C123GH6PM](https://www.ti.com/product/TM4C123GH6PM) board.
+This is our CSE211s final project. It's a [microwave interface](https://github.com/bobo122b/CSE211s-Final-Project/blob/master/Project%20description.pdf) using Ti's tiva [TM4C123GH6PM](https://www.ti.com/product/TM4C123GH6PM) board.
+
 ## Contributors 
 |**Name**| **ID** | 
 |--|--|
