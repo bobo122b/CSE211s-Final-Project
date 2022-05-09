@@ -1,7 +1,4 @@
 #include "lcd.h"
-#include "tm4c123gh6pm.h"
-#include "SysTick.h"
-#include <stdint.h>
 
 /* 
     VSS -> gnd
@@ -104,5 +101,13 @@ void LCD_WriteString(char* str)
     {
         LCD_data(*(str+i));
     }
-    
 }
+
+void gotoxy(uint32_t x, uint32_t y)
+{
+	if (y==0)
+		LCD_cmd(LCD_SETDDRAMADDR|(x+0x00));
+	else if (y==1) 
+			LCD_cmd(LCD_SETDDRAMADDR|(x+0x40));
+}
+
