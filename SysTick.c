@@ -38,7 +38,7 @@ void SysTick_Wait(uint32_t delay) {
  * @function   SysTick_Wait1ms
  * @discussion this will take an input in milliseconds, and
  * 			   delay the system for that amount of milliseconds.
- * @param 	   delayms 	the millisecond input
+ * @param 	   delayms 	millisecond input
 */
 void SysTick_Wait1ms(uint32_t delayms) {
 	unsigned long i;
@@ -46,6 +46,12 @@ void SysTick_Wait1ms(uint32_t delayms) {
 		SysTick_Wait(80000);
 }
 
+/*!
+ * @function   SysTick_Wait1us
+ * @discussion this will take an input in microseconds, and
+ * 			   delay the system for that amount of microseconds.
+ * @param 	   delayms 	microsecond input
+*/
 void SysTick_Wait1us(uint32_t delayus) {
 	unsigned long i;
 	for (i = 0; i < delayus; i++)
