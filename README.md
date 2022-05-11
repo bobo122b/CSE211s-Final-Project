@@ -11,6 +11,10 @@ This is our CSE211s final project. It's a [microwave interface](https://github.c
 | Mohamed Emad Mostafa | 1900304 |
 | Abdelrahman Sahmeh | 1900738 |
 
+## Finite-state-machine (FSM) design
+![image](https://user-images.githubusercontent.com/71796506/167958946-7d2d4836-5c49-4007-b502-a2877e8483de.png)
+
+
 ## Description of files
 
 the [.gitignore](https://github.com/bobo122b/CSE211s-Final-Project/blob/main/.gitignore) file contains the standard C gitignore file from github with extra lines for including the uvision project.
