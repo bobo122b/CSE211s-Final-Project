@@ -6,6 +6,7 @@
 #define SYSDIV2 4
 
 // Functions definitions of SysTick
+
 void SysTick_Init(void);
 void SysTick_Wait(uint32_t delay);
 void SysTick_Wait1ms(uint32_t delayms);
