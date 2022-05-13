@@ -8,7 +8,7 @@
 #include "SysTick.h"
 #include "switches.h"
 
-
+// definitions of used macros in main function
 #define doorClosed !(SW3_Pressed)
 #define Start SW2_Pressed
 #define Pause SW1_Pressed 
