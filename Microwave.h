@@ -14,7 +14,7 @@
 #define Pause SW1_Pressed 
 
 #define not_valid_num(n) (n=='A'||n=='B'||n=='C'||n=='D'||n=='*'||n=='#')
-#define not_valid_input(n) (n!='A && n!='B' && n!='C')
+#define not_valid_input(n) (n!='A' && n!='B' && n!='C' && n!='D')
 #define fill_array(arr1,arr2) arr1[0]=arr2[0]; arr1[1]=arr2[1]; arr1[2]=arr2[2]; arr1[3]=arr2[3]; arr1[4]=arr2[4] ; arr1[5]=0
 
 /*!
