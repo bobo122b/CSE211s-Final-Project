@@ -55,7 +55,6 @@ dkms.conf
 startup_TM4C123.s
 startup.s
 system_TM4C123.c
-main.c
 *.uvproj
 *.crf
 *.htm

@@ -49,7 +49,6 @@
 #define ShiftDisplyRight    0x10|0x08|0x04  // delay 37us
 #define ShiftDisplayLeft    0x10|0x08|0x00  // delay 37us
 
-
 /*
 // S/C = 1 -> display shift
 // S/C = 0 -> cursor move
@@ -66,10 +65,48 @@
 */
 
 // we set RS to 1 to write data
+
+// called before any LCD command to first initialize LCD
 void LCD_Init(void);
+/*!
+ * @fn      LCD_Write4bits
+ * @param   data    data to be sent to LCD, can either be a command or a character.
+ * @param   conrtol can be RS or 0 to make sure we're sending a command or data.
+ * @brief   sent data is written to DRAM of LCD to either make a command or write data
+ *          to screen.
+*/
 void LCD_Write4bits(char data, char control);
+/*!
+ * @fn      LCD_cmd
+ * @param   command command to be given to LCD
+ * @brief   takes a command and sends it to LCD
+*/
 void LCD_cmd(char command);
+/*!
+ * @fn      LCD_data
+ * @param   data    input character
+ * @brief   takes input character and displays it on LCD 
+ *          and shifts cursor right
+*/
 void LCD_data(char data);
+/*!
+ * @fn      LCD_WriteString
+ * @param   str string to be displayed on LCD
+ * @brief   takes input string and displays it on LCD
+*/
 void LCD_WriteString(char* str);
+/*!
+ * @fn      gotoxy
+ * @param   x   x position on the LCD (0 to 15)
+ * @param   y   y position on the LCD (0 or 1)
+ * @brief   gotoxy(x, y) moves cursor to specified location on LCD
+*/
 void gotoxy(uint32_t, uint32_t); //Goto point (x,y) ==> first point at the first line(0,0) 
-						//first point at the second line(0,1)
+						         //first point at the second line(0,1)
+/*!
+ * @fn      LCD_CountDown
+ * @param   time takes a char array that is to be displayed on LCD
+ * @brief   takes input in the form of "mm:ss" and counts it down on
+ *          the LCD
+*/
+void LCD_CountDown(char[]);
