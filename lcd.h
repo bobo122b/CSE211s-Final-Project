@@ -73,3 +73,4 @@ void LCD_data(char data);
 void LCD_WriteString(char* str);
 void gotoxy(uint32_t, uint32_t); //Goto point (x,y) ==> first point at the first line(0,0) 
 						//first point at the second line(0,1)
+void LCD_CountDown(char[]); //takes input like that minutes:seconds 

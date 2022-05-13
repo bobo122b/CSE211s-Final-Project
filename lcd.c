@@ -55,6 +55,9 @@ void LCD_Init(void)
     LCD_cmd(entryMode);
 		LCD_cmd(cursorBlink);
     SysTick_Wait1ms(2);
+			
+		LCD_cmd(clearDisplay);
+		LCD_cmd(returnHome);	
 }
 
 void LCD_Write4bits(char data, char control)
@@ -111,3 +114,32 @@ void gotoxy(uint32_t x, uint32_t y)
 			LCD_cmd(LCD_SETDDRAMADDR|(x+0x40));
 }
 
+void LCD_CountDown(char time[])
+{
+		LCD_cmd(clearDisplay);
+		LCD_cmd(returnHome);
+		
+		while(1)
+		{
+				if (time[0]=='0'&&time[1]=='0'&&time[3]=='0'&&time[4]=='0') break;
+				LCD_WriteString(time);
+			if (time[4]!='0')
+				time[4]--;
+			else if (time[3]!='0')
+			{
+					time[3]--;
+					time[4] = '9';
+			}
+			else if (time[1]!='0')
+			{
+					time[1]--;
+					time[3]='5';
+					time[4]='9';
+			}
+			else if (time[0]!='0')
+				time[0]--;
+			SysTick_Wait1ms(1000);
+			LCD_WriteString(time);
+			LCD_cmd(clearDisplay);
+		}
+}
