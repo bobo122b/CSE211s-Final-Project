@@ -45,8 +45,7 @@ int main()
 				LCD_data(keypadInput);
 				state = INPUT;
 				break;
-			
-			case INPUT:
+						case INPUT:
 				SysTick_Wait1ms(2000); //Wait 2 seconds before clearing the display
 				LCD_cmd(clearDisplay);
 				LCD_cmd(returnHome);
@@ -149,19 +148,6 @@ int main()
 					LCD_WriteString("ZOBR");
 					SysTick_Wait1ms(2000);
 					state = IDLE;
-				}
-				break;
-							
-			case COOKING:
-				GPIO_PORTF_DATA_R |= red|blue|green;
-				break;
-					
-			case PAUSED:
-				Pause_Counter++;
-				if (Pause_Counter==2)
-				{
-					LCD_WriteString("00:00");
-					state=IDLE;
 				}
 				break;
 		}
