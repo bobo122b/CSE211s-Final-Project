@@ -111,7 +111,7 @@ void gotoxy(uint32_t x, uint32_t y)
 	if (y==0)
 		LCD_cmd(LCD_SETDDRAMADDR|(x+0x00));
 	else if (y==1) 
-			LCD_cmd(LCD_SETDDRAMADDR|(x+0x40));
+		LCD_cmd(LCD_SETDDRAMADDR|(x+0x40));
 }
 
 void LCD_CountDown(char time[])
@@ -121,8 +121,8 @@ void LCD_CountDown(char time[])
 		
 		while(1)
 		{
-				if (time[0]=='0'&&time[1]=='0'&&time[3]=='0'&&time[4]=='0') break;
-				LCD_WriteString(time);
+			if (time[0]=='0'&&time[1]=='0'&&time[3]=='0'&&time[4]=='0') break;
+			LCD_WriteString(time);
 			if (time[4]!='0')
 				time[4]--;
 			else if (time[3]!='0')
