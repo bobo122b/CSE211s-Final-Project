@@ -37,7 +37,7 @@ int main()
 				GPIO_PORTF_DATA_R &=~(red|blue|green);
 				LCD_cmd(clearDisplay);
 				LCD_cmd(returnHome);
-				LCD_WriteString("ttf7 eh??"); 
+				LCD_WriteString("Input:A, B, C, D"); 
 				LCD_cmd(SecondLine);
 				LCD_WriteString("Input: ");
 				keypadInput = Keypad_getKey();
