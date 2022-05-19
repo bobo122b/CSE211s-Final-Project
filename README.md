@@ -27,7 +27,7 @@ You can download [Keil v4.7](https://www.keil.com/demo/eval/armv4.htm) and our c
 
 
 ## Circuit Schematic
-![image](https://user-images.githubusercontent.com/74486351/169195497-8616a31a-039f-4976-9a27-f7a427a458ba.png)
+![image](https://user-images.githubusercontent.com/74486351/169311207-fbcc6fee-5047-452c-85fd-6acfb2ca4b30.png)
 
 ## PCB layout
-![image](https://user-images.githubusercontent.com/74486351/169195678-05258a5e-ade1-4db0-9fea-c85c8bedf59c.png)
+![image](https://user-images.githubusercontent.com/74486351/169311122-d559b2c4-ffaa-4023-805d-b68ae179579e.png)
