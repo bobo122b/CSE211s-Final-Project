@@ -9,7 +9,7 @@ This is our CSE211s final project. It's a [microwave interface](https://github.c
 | Ahmed Hamdy Muhammed | 1900206 |
 | Ahmed Shafeek Shafeek | 1900112 |
 | Mohamed Emad Mostafa | 1900304 |
-| Abdelrahman Sameh | 1900738 |
+| Abdelrahman Sameh Ahmed | 1900738 |
 
 ## Finite-state-machine (FSM) design
 ![image](https://user-images.githubusercontent.com/71796506/167958946-7d2d4836-5c49-4007-b502-a2877e8483de.png)
@@ -24,3 +24,9 @@ the [tm4c123gh6pm.h](https://github.com/bobo122b/CSE211s-Final-Project/blob/main
 ## Code Compilation
 
 You can download [Keil v4.7](https://www.keil.com/demo/eval/armv4.htm) and our code and compile to see the output.
+
+## Circuit Schematic
+![image](https://user-images.githubusercontent.com/74486351/169315496-011f3b8c-e650-4a50-a2ac-919185185377.png)
+
+## PCB layout
+![image](https://user-images.githubusercontent.com/74486351/169311122-d559b2c4-ffaa-4023-805d-b68ae179579e.png)
