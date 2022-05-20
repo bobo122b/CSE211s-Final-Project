@@ -17,6 +17,19 @@
 #define not_valid_input(n) (n!='A' && n!='B' && n!='C' && n!='D')
 #define fill_array(arr1,arr2) arr1[0]=arr2[0]; arr1[1]=arr2[1]; arr1[2]=arr2[2]; arr1[3]=arr2[3]; arr1[4]=arr2[4] ; arr1[5]=0
 
+#define CookingIsDone (cookingTime[0] == '0' && cookingTime[1] == '0' && cookingTime[3] == '0' && cookingTime[4] == '0')
+
+#define not_valid_CookingTime(t) ( not_valid_num(t[0]) || not_valid_num(t[1]) || not_valid_num(t[3]) || not_valid_num(t[4]) || \
+(t[0] > '3' || t[0] < '0') ||\
+(t[1] > '9' || t[1] < '0') ||\
+(t[3] > '5' || t[3] < '0') ||\
+(t[4] > '9' || t[4] < '0') ||\
+(t[0] == '3' && (t[1] > '0' || t[3] > '0' || t[4] > '0' )) ||\
+(CookingIsDone))
+
+#define buzzer 			(1U<<2)   												// Pin A2 for buzzer
+#define Buzzer_Init() 	GPIO_PORTA_DEN_R |=buzzer; GPIO_PORTA_DIR_R |=buzzer
+
 /*!
  * @typedef     State
  * @c           IDLE    Ready for any input, door is closed.
