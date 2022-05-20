@@ -9,7 +9,7 @@ This is our CSE211s final project. It's a [microwave interface](https://github.c
 | Ahmed Hamdy Muhammed | 1900206 |
 | Ahmed Shafeek Shafeek | 1900112 |
 | Mohamed Emad Mostafa | 1900304 |
-| Abdelrahman Sahmeh | 1900738 |
+| Abdelrahman Sameh Ahmed | 1900738 |
 
 ## Finite-state-machine (FSM) design
 ![image](https://user-images.githubusercontent.com/71796506/167958946-7d2d4836-5c49-4007-b502-a2877e8483de.png)
