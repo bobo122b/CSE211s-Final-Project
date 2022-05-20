@@ -197,7 +197,24 @@ int main()
 //********************************************************************************************************								
 				
 				case COOKING:
-
+						LCD_cmd(clearDisplay);
+						LCD_cmd(returnHome);
+						GPIO_PORTF_DATA_R |=(red|green|blue);
+						LCD_cmd(cursorOff);
+						LCD_CountDown();
+						if (CookingIsDone)
+						{
+							LCD_WriteString("DONE");
+							while (counter<5)
+							{
+									GPIO_PORTF_DATA_R ^= (red|green|blue);
+									GPIO_PORTA_DATA_R ^=buzzer;
+									SysTick_Wait1ms(1000);
+									counter++;
+							}
+							LCD_cmd(cursorBlink);
+							state = IDLE;
+						}
 							
 					break;
 
@@ -206,7 +223,13 @@ int main()
 //********************************************************************************************************				
 				
 				case PAUSED: 
-
+					LCD_cmd(clearDisplay);
+					LCD_cmd(cursorOff);
+					LCD_WriteString(cookingTime);
+					LCD_cmd(SecondLine);
+					LCD_WriteString("PAUSED");
+					GPIO_PORTF_DATA_R ^=(red|green|blue);
+					SysTick_Wait1ms(500);
 				break;
 		}
 	}
