@@ -114,32 +114,51 @@ void gotoxy(uint32_t x, uint32_t y)
 		LCD_cmd(LCD_SETDDRAMADDR|(x+0x40));
 }
 
-void LCD_CountDown(char time[])
+void LCD_CountDown(void)
 {
 		LCD_cmd(clearDisplay);
 		LCD_cmd(returnHome);
 		
-		while(1)
-		{
-			if (time[0]=='0'&&time[1]=='0'&&time[3]=='0'&&time[4]=='0') break;
-			LCD_WriteString(time);
-			if (time[4]!='0')
-				time[4]--;
-			else if (time[3]!='0')
-			{
-					time[3]--;
-					time[4] = '9';
-			}
-			else if (time[1]!='0')
-			{
-					time[1]--;
-					time[3]='5';
-					time[4]='9';
-			}
-			else if (time[0]!='0')
-				time[0]--;
-			SysTick_Wait1ms(1000);
-			LCD_WriteString(time);
-			LCD_cmd(clearDisplay);
-		}
+		while ( (!(CookingIsDone) && state == COOKING)) 
+					{
+									if (!doorClosed) 
+										{
+											cookingTime[4]++;
+										if (cookingTime[4]==':')
+											{
+												cookingTime[4]='0';
+												cookingTime[3]++;
+												
+											}
+											if (cookingTime[3]=='6' && cookingTime[4]=='0') {cookingTime[1]++; cookingTime[3]='0'; cookingTime[4]='0';}
+											state = PAUSED; 
+											break;
+										}
+									LCD_WriteString(cookingTime);
+									if (cookingTime[4]!='0')
+										cookingTime[4]--;
+									else if (cookingTime[3]!='0')
+									{
+											cookingTime[3]--;
+											cookingTime[4] = '9';
+									}
+									else if (cookingTime[1]!='0')
+									{
+											cookingTime[1]--;
+											cookingTime[3]='5';
+											cookingTime[4]='9';
+									}
+									else if (cookingTime[0]!='0')
+									{
+									cookingTime[0]--;
+									cookingTime[1] = '9';
+									cookingTime[3]= '5';
+									cookingTime[4] = '9';
+									}
+									
+									
+									SysTick_Wait1ms(1000);
+									LCD_WriteString(cookingTime);
+									LCD_cmd(clearDisplay);
+				}
 }
