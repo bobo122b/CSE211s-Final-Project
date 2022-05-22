@@ -29,4 +29,5 @@ You can download [Keil v4.7](https://www.keil.com/demo/eval/armv4.htm) and our c
 ![image](https://user-images.githubusercontent.com/74486351/169676964-2887b1f0-8f6e-4c28-8520-144b6c540ef1.png)
 
 ## PCB layout
-![image](https://user-images.githubusercontent.com/74486351/169677002-24b49c34-2ab7-4a48-9be1-fb2b9bb0075e.png)
+![WhatsApp Image 2022-05-22 at 10 44 36 AM](https://user-images.githubusercontent.com/71796506/169693146-4bcce6d5-ded8-4f9a-a855-ec4a34dd5ea3.jpeg)
+
