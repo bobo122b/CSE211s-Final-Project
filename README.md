@@ -26,7 +26,8 @@ the [tm4c123gh6pm.h](https://github.com/bobo122b/CSE211s-Final-Project/blob/main
 You can download [Keil v4.7](https://www.keil.com/demo/eval/armv4.htm) and our code and compile to see the output.
 
 ## Circuit Schematic
-![image](https://user-images.githubusercontent.com/74486351/169315496-011f3b8c-e650-4a50-a2ac-919185185377.png)
+![image](https://user-images.githubusercontent.com/74486351/169676964-2887b1f0-8f6e-4c28-8520-144b6c540ef1.png)
 
 ## PCB layout
-![image](https://user-images.githubusercontent.com/74486351/169311122-d559b2c4-ffaa-4023-805d-b68ae179579e.png)
+![WhatsApp Image 2022-05-22 at 10 44 36 AM](https://user-images.githubusercontent.com/71796506/169693146-4bcce6d5-ded8-4f9a-a855-ec4a34dd5ea3.jpeg)
+
