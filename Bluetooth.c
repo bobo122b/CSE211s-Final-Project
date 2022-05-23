@@ -47,7 +47,7 @@ char Bluetooth_ReceiveChar(void)
           }
       }
     data = UART5_DR_R; 			// before giving it another byte
-		data = (unsigned char) data;
+	return ((unsigned char) data);
 }
 
 void Bluetooth_SendChar(unsigned char data)
