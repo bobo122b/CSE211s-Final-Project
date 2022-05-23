@@ -129,58 +129,89 @@ int main()
 													while (!Start); //to prevent breaking case
 													timing_string(Weight,keypadInput);
 												}
-						 else if (keypadInput == 'D')
-												{
-													LCD_WriteString("Cooking time?");
-													LCD_cmd(cursorOff);
-													SysTick_Wait1ms(2000);
-													LCD_cmd(clearDisplay);
-													LCD_cmd(cursorBlink);
+				else if (Input == 'D')
+				{
+													fill_array(cookingTime, "00:00");			// in the beginning, cookingTime will be equal to "00:00"
+													LCD_WriteString(cookingTime);				// display cookingTime on LCD
 													
-													cookingTime[0]= Keypad_getKey(); 
-													LCD_WriteString("00:0");
-													LCD_data(cookingTime[0]);
+													// take the first number from user		
+													cookingTime[4]= Keypad_getKey();			// take input from user in the last cooking time index
+													while (not_valid_num(cookingTime[4]))
+													{
+														LCD_WriteString("Error");								// the user didn't input a valid number
+														SysTick_Wait1ms(1000);
+														LCD_cmd(clearDisplay);
+														fill_array(cookingTime, "00:00");		// in the beginning, cookingTime will be equal to "00:00"
+														LCD_WriteString(cookingTime);			// display cookingTime on LCD
+
+														cookingTime[4]= Keypad_getKey();
+														
+													}
+													LCD_cmd(clearDisplay);
+													LCD_WriteString(cookingTime);				// display cookingTime on LCD
 													SysTick_Wait1ms(500);
-													
-													
-													cookingTime[1]= Keypad_getKey();
+
+													// take the second number from user			
+													rearrange(cookingTime);						// rearrange cookingTime to be ready for next input
+													cookingTime[4]= Keypad_getKey();			// take input from user in the last cooking time index
+													}
+													if (not_valid_num(cookingTime[4]))
+													{
+														LCD_WriteString("Error");							// the user didn't input a valid number
+														SysTick_Wait1ms(1000);
+														state = IDLE;
+														break;
+													}
 													LCD_cmd(clearDisplay);
-													LCD_WriteString("00:");
-													LCD_data(cookingTime[0]);
-													LCD_data(cookingTime[1]);
-													cookingTime[2]= ':';
+													LCD_WriteString(cookingTime);				// display cookingTime on LCD
 													SysTick_Wait1ms(500);
-													
-													cookingTime[3]= Keypad_getKey();
+																					
+													rearrange(cookingTime);						// rearrange cookingTime to be ready for next input
+													cookingTime[4]= Keypad_getKey();			// take input from user in the last cooking time index
+													if (not_valid_num(cookingTime[4]))
+													{
+														LCD_WriteString("Error");								// the user didn't input a valid number
+														SysTick_Wait1ms(1000);
+														state = IDLE;
+														break;
+													}
 													LCD_cmd(clearDisplay);
-													LCD_data('0');
-													LCD_data(cookingTime[0]);
-													LCD_data(cookingTime[2]);
-													LCD_data(cookingTime[1]);
-													LCD_data(cookingTime[3]);
+													LCD_WriteString(cookingTime);				// display cookingTime on LCD
 													SysTick_Wait1ms(500);
-													
-													cookingTime[4]= Keypad_getKey();
+																				
+													rearrange(cookingTime);						// rearrange cookingTime to be ready for next input
+													cookingTime[4]= Keypad_getKey();			// take input from user in the last cooking time index
+													}
+													if (not_valid_num(cookingTime[4]))
+													{
+														LCD_WriteString("Error");								// the user didn't input a valid number
+														SysTick_Wait1ms(1000);
+														state = IDLE;
+														break;
+													}
 													LCD_cmd(clearDisplay);
-													cookingTime[5]=0;
-													LCD_WriteString(cookingTime);
-													SysTick_Wait1ms(2000);
+													LCD_WriteString(cookingTime);				// display cookingTime on LCD
+													SysTick_Wait1ms(1000);
 													LCD_cmd(clearDisplay);
-												
+																				
 													if (not_valid_CookingTime(cookingTime))
 													{
-															LCD_cmd(cursorOff);
-															LCD_WriteString("Err");
-															LCD_cmd(SecondLine);
-															LCD_WriteString("01:00 to 30:00");
+														LCD_WriteString("Error");						// if the cooking time is not valid go back to IDLE
 													}
 													else
 													{	
-														LCD_cmd(cursorOff);
-														LCD_WriteString("SW2 to start");
-														while (!Start); //to prevent breaking case
+														LCD_WriteString("SW2");
+														while (!start);				// if the cooking time is valid -> start cooking when SW2 if pressed
+															while(!doorClosed)
+															{
+																LCD_cmd(clearDisplay);
+																LCD_WriteString("Close the Door");
+																SysTick_Wait1ms(300);
+															}
+															state = COOKING;
+														}
 													}								
-											}
+				}
 				else if (not_valid_input(keypadInput))
 								{
 											LCD_cmd(cursorOff);
