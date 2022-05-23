@@ -17,6 +17,18 @@
 #define not_valid_input(n) (n!='A' && n!='B' && n!='C' && n!='D')
 #define fill_array(arr1,arr2) arr1[0]=arr2[0]; arr1[1]=arr2[1]; arr1[2]=arr2[2]; arr1[3]=arr2[3]; arr1[4]=arr2[4] ; arr1[5]=0
 
+
+#define dearrange(arr) arr[4] = arr[3];\
+arr[3] = arr[1];\
+arr[1] = arr[0];\
+arr[0] = '0';\
+arr[5] = 0
+
+#define rearrange(arr) arr[0] = arr[1];\
+arr[1] = arr[3];\
+arr[3] = arr[4];\
+arr[5] = 0
+
 #define CookingIsDone (cookingTime[0] == '0' && cookingTime[1] == '0' && cookingTime[3] == '0' && cookingTime[4] == '0')
 
 #define not_valid_CookingTime(t) ( not_valid_num(t[0]) || not_valid_num(t[1]) || not_valid_num(t[3]) || not_valid_num(t[4]) || \
