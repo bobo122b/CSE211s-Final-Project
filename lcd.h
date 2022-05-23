@@ -1,3 +1,9 @@
+/*************************************************************************************************
+ *!
+ * @file 		lcd.c
+ * @authors  	Abdelrahman Mostafa, Ahmed Shafeek, Ahmed Hamdy, Muhammed Emad, Abdelrahman Sameh 
+ * @brief		contains the functions that defines how to use the LCD and connect it to Tiva
+**************************************************************************************************/
 /* 
     VSS -> gnd
     VDD -> 5V
@@ -16,35 +22,34 @@
     A   -> 5V
     K   -> gnd
 */
-#include "stdint.h"
-#include "tm4c123gh6pm.h"
-#include "SysTick.h"
+#include "Microwave.h"
+#include <stdint.h>
 
-#define EN                  0x40    // PB0
-#define RS                  0x20    // PB5
+#define EN                  0x40    // PA6
+#define RS                  0x20    // PA5
 #define clearDisplay        0x01    // delay 2ms
 
 
 // writes blank to all addresses and returns to address 0
-#define returnHome          0x02    // delay 2ms
+#define returnHome          0x02   // delay 2ms
 // returns to address 0 and to original state
 // cursor goes to left edge of first line
-#define displayOn           0x0A    // delay 37us
+#define displayOn           0x0A   // delay 37us
 // should be on to display the characters
-#define cursorOn            0x0E    // delay 37us
+#define cursorOn            0x0E   // delay 37us
 // displays cursor position
-#define cursorBlink         0x0F    // delay 37us
+#define cursorBlink         0x0F   // delay 37us
 // blinks cursor or character at which cursor is
-#define cursorOff           0xC  // delay 37us
+#define cursorOff           0xC    // delay 37us
 #define IncrementCursor     0x10|0x04    // delay 37us
 #define DecrementCursor     0x10|0x00    // delay 37us
 // in 2-line display, it moves to second line when passes 40
-#define setTo4Bits          0x28    // delay 37us
+#define setTo4Bits          0x28   // delay 37us
 // 4-bit length, 2 display lines, 5x8 font
-#define entryMode           0x06    // delay 37us
+#define entryMode           0x06   // delay 37us
 // increments DDRAM address by 1 when a character is written into it
-#define firstLine           0x80   //// delay 37us
-#define SecondLine					0xC0   // delay 37us
+#define firstLine           0x80   // delay 37us
+#define SecondLine			0xC0   // delay 37us
 #define LCD_SETDDRAMADDR    0x80   
 #define ShiftDisplyRight    0x10|0x08|0x04  // delay 37us
 #define ShiftDisplayLeft    0x10|0x08|0x00  // delay 37us
@@ -101,7 +106,7 @@ void LCD_WriteString(char* str);
  * @param   y   y position on the LCD (0 or 1)
  * @brief   gotoxy(x, y) moves cursor to specified location on LCD
 */
-void gotoxy(uint32_t, uint32_t); //Goto point (x,y) ==> first point at the first line(0,0) 
+void gotoxy(uint32_t x, uint32_t y); //Goto point (x,y) ==> first point at the first line(0,0)
 						         //first point at the second line(0,1)
 /*!
  * @fn      LCD_CountDown
@@ -109,4 +114,4 @@ void gotoxy(uint32_t, uint32_t); //Goto point (x,y) ==> first point at the first
  * @brief   takes input in the form of "mm:ss" and counts it down on
  *          the LCD
 */
-void LCD_CountDown(char[]);
+void LCD_CountDown(void);
