@@ -1,7 +1,7 @@
 #ifndef SYSTICK_H_
 #define SYSTICK_H_
 #include "tm4c123gh6pm.h"
-#define SYSDIV2 4
+
 
 #define SYSDIV2 4
 
