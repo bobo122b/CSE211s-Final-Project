@@ -17,6 +17,7 @@ void SystemInit(void) {
 	StepperInit();     // Initialize Stepper Motor pins
 }
 
+
 //Declaration of extern variables in Microwave.h
 char cookingTime[6];
 State state;
