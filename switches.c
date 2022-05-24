@@ -8,48 +8,48 @@
 
 void Switches_Init(void)
 {
-		// Initializing port F
-		SYSCTL_RCGCGPIO_R |=0x20;
-		while ((SYSCTL_PRGPIO_R&0x20)==0){}
-		GPIO_PORTF_LOCK_R = GPIO_LOCK_KEY;
-		GPIO_PORTF_CR_R = red|blue|green|SW1|SW2;
-		GPIO_PORTF_DEN_R |= red|blue|green|SW1|SW2;
-		GPIO_PORTF_DIR_R |= red|green|blue;
-		GPIO_PORTF_DIR_R  &= (~SW1)|(~SW2);
-		GPIO_PORTF_PUR_R |= SW1|SW2; 				//SW1, SW2 input
-		GPIO_PORTF_AMSEL_R = 0;
-		GPIO_PORTF_AFSEL_R = 0;
-		GPIO_PORTF_PCTL_R = 0;
+	// Initializing port F
+	SYSCTL_RCGCGPIO_R |=0x20;
+	while ((SYSCTL_PRGPIO_R&0x20)==0){}
+	GPIO_PORTF_LOCK_R  = GPIO_LOCK_KEY;
+	GPIO_PORTF_CR_R    = red|blue|green|SW1|SW2;
+	GPIO_PORTF_DEN_R  |= red|blue|green|SW1|SW2;
+	GPIO_PORTF_DIR_R  |= red|green|blue;
+	GPIO_PORTF_DIR_R  &= (~SW1)|(~SW2);
+	GPIO_PORTF_PUR_R  |= SW1|SW2; 						//SW1, SW2 input
+	GPIO_PORTF_AMSEL_R = 0;
+	GPIO_PORTF_AFSEL_R = 0;
+	GPIO_PORTF_PCTL_R  = 0;
 			
-		// Initializin port A
-		SYSCTL_RCGCGPIO_R |=0x01;
-		while ((SYSCTL_PRGPIO_R&0x01)==0){}
-		GPIO_PORTA_LOCK_R = GPIO_LOCK_KEY;
-		GPIO_PORTA_CR_R |= IR;	
-		GPIO_PORTA_DEN_R |= IR;
-		GPIO_PORTA_DIR_R &= ~(IR); 				//IR input
-		GPIO_PORTA_PUR_R |= IR;
-		GPIO_PORTA_AMSEL_R = 0;
-		GPIO_PORTA_AFSEL_R = 0;
-		GPIO_PORTA_PCTL_R = 0;
+	// Interrupt initialization	for port F
+	NVIC_EN0_R       |= 1U<<30; 		//Enabling PORTF Interrupt 
+	GPIO_PORTF_IS_R  &= (~SW1)|(~SW2); 			//Interrupt sense   0 for edge && 1 for level		
+	GPIO_PORTF_IBE_R &= (~SW1)|(~SW2);  		 		 //Interrupt both edges 0 Edge controlled by GPIOIEV && 1 Both edges
+	GPIO_PORTF_IEV_R &= (~SW1)|(~SW2); 	 				 //Interrupt Event 0 Falling && 1 Rising
+	GPIO_PORTF_ICR_R |= SW1|SW2;   				 		 //Clear any prior interrupt
+	GPIO_PORTF_IM_R  |= SW1|SW2;  					 	 //Interrupt Mask  1 Enable Interrupt &&  0 Disable interrupt	
+	NVIC_PRI7_R = (NVIC_PRI7_R & 0xFF00FFFF) | (1U<<20); //Make Pause/Start Switches of priority 1 (Lower Priority than door latch)	
 	
-		// Interrupt initialization for port F
-		NVIC_EN0_R       |= 1U<<30; 				  //Enabling PORTF Interrupt 
-		GPIO_PORTF_IS_R  &= (~SW1)|(~SW2); 		     	  //Interrupt sense   0 for edge && 1 for level		
-		GPIO_PORTF_IBE_R &= (~SW1)|(~SW2);  		          //Interrupt both edges 0 Edge controlled by GPIOIEV && 1 Both edges
-		GPIO_PORTF_IEV_R &= (~SW1)|(~SW2); 	 		  //Interrupt Event 0 Falling && 1 Rising
-		GPIO_PORTF_ICR_R |= SW1|SW2;   				  //Clear any prior interrupt
-		GPIO_PORTF_IM_R  |= SW1|SW2;  		       	          //Interrupt Mask  1 Enable Interrupt &&  0 Disable interrupt	
-		NVIC_PRI7_R = (NVIC_PRI7_R & 0xFF00FFFF) | (1U<<20);      //Make Pause/Start Switches of priority 1 (Lower Priority than door latch)
-	
-		// Interrupt initialization for port A
-		NVIC_EN0_R 	 |= 1U<<0; 				 //Enabling PORTA Interrupt 
-		GPIO_PORTA_IS_R  &=	~IR;      			 //Interrupt sense   0 for edge && 1 for level
-		GPIO_PORTA_IBE_R &= ~IR;  		 		 //Interrupt both edges 0 Edge controlled by GPIOIEV && 1 Both edges
-		GPIO_PORTA_IEV_R |= IR;    			         //Interrupt Event 0 Falling && 1 Rising
-		GPIO_PORTA_ICR_R |= IR;   		 		 //Clear any prior interrupt
-		GPIO_PORTA_IM_R  |= IR;  		 	         //Interrupt Mask  1 Enable Interrupt &&  0 Disable interrupt
-		NVIC_PRI0_R = (NVIC_PRI0_R & 0xFF00FFFF) | (0U<<20); 	 //Make Door Latch of priority 0 (Highest priority)
+	// Initializin port A
+	SYSCTL_RCGCGPIO_R |= 0x01;
+	while ((SYSCTL_PRGPIO_R&0x01)==0){}
+	GPIO_PORTA_LOCK_R  = GPIO_LOCK_KEY;
+	GPIO_PORTA_CR_R   |= IR;
+	GPIO_PORTA_DEN_R  |= IR;
+	GPIO_PORTA_DIR_R  &= ~(IR); 						 //IR input
+	GPIO_PORTA_PUR_R  |= IR;
+	GPIO_PORTA_AMSEL_R = 0;
+	GPIO_PORTA_AFSEL_R = 0;
+	GPIO_PORTA_PCTL_R  = 0;	
+
+	// Interrupt initialization	for port A
+	NVIC_EN0_R 		 |= 1U<<0; 				 			 //Enabling PORTA Interrupt 
+	GPIO_PORTA_IS_R  &=	~IR;      						 //Interrupt sense   0 for edge && 1 for level
+	GPIO_PORTA_IBE_R &= ~IR;  		 					 //Interrupt both edges 0 Edge controlled by GPIOIEV && 1 Both edges
+	//GPIO_PORTA_IEV_R	|= IR;    						 //Interrupt Event 0 Falling && 1 Rising
+	GPIO_PORTA_ICR_R |= IR;   		 					 //Clear any prior interrupt
+	GPIO_PORTA_IM_R  |= IR;  		 	 		     	 //Interrupt Mask  1 Enable Interrupt &&  0 Disable interrupt
+	NVIC_PRI0_R = (NVIC_PRI0_R & 0xFF00FFFF) | (0U<<20); //Make Door Latch of priority 0 (Highest priority)
 }
 
 void GPIOF_Handler(void)
@@ -115,7 +115,6 @@ void GPIOF_Handler(void)
 	}
 }
 
-
 void GPIOA_Handler(void)
 {
 	if (GPIO_PORTA_MIS_R&IR)
@@ -127,14 +126,26 @@ void GPIOA_Handler(void)
 		}
 		else if (state == INPUT && (doorClosed))
 		{
-			LCD_cmd(clearDisplay);
 			if(doorClosed) SW2_Msg;
 			SysTick_Wait1ms(1000);
-			if (Input == 'D')
+			if (Input == 'B' && Weight == 'U')
+			{
+			    LCD_cmd(clearDisplay);
+                LCD_cmd(returnHome);
+			    Beef_Msg;
+			}
+			else if (Input == 'C' && Weight == 'U')
+			{
+			    LCD_cmd(clearDisplay);
+                LCD_cmd(returnHome);
+			    Chicken_Msg;
+			}
+			else if (Input == 'D')
 			{
 			    LCD_cmd(clearDisplay);
 			    LCD_cmd(returnHome);
 			    dearrange(cookingTime);
+			    gotoxy(5,0);
 			    LCD_WriteString(cookingTime);
 			    Bluetooth_SendString(cookingTime);
 			    Bluetooth_SendChar('\n');
@@ -144,4 +155,3 @@ void GPIOA_Handler(void)
 		GPIO_PORTA_ICR_R |= IR;  // Clear Interrupt
 	}
 }
-

@@ -139,6 +139,7 @@ void LCD_CountDown(void)
 			break;
 		}
 		// door is closed -> start cooking
+		gotoxy(5,0);
 		LCD_WriteString(cookingTime);
 		Bluetooth_SendString(cookingTime);
 		Bluetooth_SendChar('\n');
@@ -164,6 +165,7 @@ void LCD_CountDown(void)
 		}
 									
 		RotorStart();			// Start the motor and Countdown /*Systick delay is embedded in side the RotorStart function*/
+		gotoxy(5,0);
 		LCD_WriteString(cookingTime);	
 		LCD_cmd(clearDisplay);
 	}

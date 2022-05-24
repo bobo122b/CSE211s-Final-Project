@@ -7,6 +7,11 @@
 **************************************************************************************************/
 #include "Microwave.h"
 
+#define R1 1U<<0
+#define R2 1U<<1
+#define R3 1U<<2
+#define R4 1U<<3
+
 // the mapping of the Keypad
 unsigned char map[4][4] = {
     {'1', '2', '3', 'A'},
@@ -14,6 +19,7 @@ unsigned char map[4][4] = {
     {'7', '8', '9', 'C'},
     {'*', '0', '#', 'D'}
 };
+
 
 void Keypad_Init(void) 
 {
@@ -27,6 +33,14 @@ void Keypad_Init(void)
     GPIO_PORTC_DIR_R |= 0xF0;               // making port C pins as Output
     GPIO_PORTC_DEN_R |= 0xF0;               // enabling PC4~7 as digital pins
     GPIO_PORTE_DEN_R |= 0x0F;               // enabling PE0~3 as digital pins
+
+    // Interrupt initialization for port E
+    NVIC_EN0_R |= 1U<<4;                             // Enabling port E interrupt
+    GPIO_PORTE_IS_R  &= (~R1)|(~R2)|(~R3)|(~R4);     // Interrupt sense   0 for edge && 1 for level
+    GPIO_PORTE_IBE_R &= (~R1)|(~R2)|(~R3)|(~R4);     // Interrupt both edges 0 Edge controlled by GPIOIEV && 1 Both edges
+    GPIO_PORTE_IEV_R &= (~R1)|(~R2)|(~R3)|(~R4);     // Interrupt Event 0 Falling && 1 Rising
+    GPIO_PORTE_ICR_R |= R1|R2|R3|R4;                 // Clear any prior interrupt
+    GPIO_PORTE_IM_R  |= R1|R2|R3|R4;                 // Interrupt Mask  1 Enable Interrupt &&  0 Disable interrupt
 }
 
 char Keypad_getKey(void)

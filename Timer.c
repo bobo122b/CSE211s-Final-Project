@@ -23,4 +23,3 @@ void timing_string(char Weight, char keypadInput)
 	cookingTime[1] = min+'0';
 	cookingTime[0] = '0';
 }
-
