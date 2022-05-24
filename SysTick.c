@@ -1,5 +1,10 @@
-#include "SysTick.h"
-#include <stdint.h>
+/*************************************************************************************************
+ *!
+ * @file 		SysTick.c
+ * @authors  	Abdelrahman Sameh, Abdelrahman Mostafa, Ahmed Shafeek, Ahmed Hamdy, Muhammed Emad 
+ * @brief		contains the functions that recognize and define SysTick timer and its use
+**************************************************************************************************/
+#include "Microwave.h"
 
 void PLL_Init(void){
 	// 0) Use RCC2
@@ -22,10 +27,10 @@ void PLL_Init(void){
 }
 
 void SysTick_Init(void) {
-	NVIC_ST_CTRL_R    = 0;
-	NVIC_ST_RELOAD_R  = 0x00FFFFFF;
-	NVIC_ST_CURRENT_R = 0;
-	NVIC_ST_CTRL_R    = 0X00000005;
+	NVIC_ST_CTRL_R    = 0;				// disable SysTick timer
+	NVIC_ST_RELOAD_R  = 0x00FFFFFF;		// maximum value when initialized
+	NVIC_ST_CURRENT_R = 0;				// to apply changes of reload
+	NVIC_ST_CTRL_R    = 0X00000005;  	// Enable clk, Counter, No Interrupt
 }
 
 void SysTick_Wait(uint32_t delay) {
@@ -34,26 +39,14 @@ void SysTick_Wait(uint32_t delay) {
 	while ((NVIC_ST_CTRL_R&0x00010000)==0) {}
 }
 
-/*!
- * @function   SysTick_Wait1ms
- * @discussion this will take an input in milliseconds, and
- * 			   delay the system for that amount of milliseconds.
- * @param 	   delayms 	millisecond input
-*/
 void SysTick_Wait1ms(uint32_t delayms) {
 	unsigned long i;
 	for (i = 0; i < delayms; i++)
-		SysTick_Wait(80000);
+		SysTick_Wait(80000);			// will delay 1ms
 }
 
-/*!
- * @function   SysTick_Wait1us
- * @discussion this will take an input in microseconds, and
- * 			   delay the system for that amount of microseconds.
- * @param 	   delayms 	microsecond input
-*/
 void SysTick_Wait1us(uint32_t delayus) {
 	unsigned long i;
 	for (i = 0; i < delayus; i++)
-		SysTick_Wait(80);
+		SysTick_Wait(80);				// will delay 1us
 }

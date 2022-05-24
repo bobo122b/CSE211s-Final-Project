@@ -7,8 +7,8 @@
 #ifndef SWITCHES_H
 #define SWITCHES_H
 
-#define SW1 1U<<4   //SW1: F4
-#define SW2 1U<<0  //SW2: F0
+#define SW1     1U<<4   //SW1: F4   Pause
+#define SW2     1U<<0   //SW2: F0   Start
 #define IR      1U<<7   //SW3: A7   Door
 
 #define red     1U<<1   // red   led PF1
@@ -28,6 +28,7 @@ Bluetooth_SendString("Err\nInput first\n")
 
 #define Close_Door_Msg LCD_cmd(clearDisplay);\
 LCD_cmd(cursorOff);\
+gotoxy(1,0);\
 LCD_WriteString("Close the door");\
 Bluetooth_SendString("Close the door\n")
 
@@ -35,6 +36,7 @@ Bluetooth_SendString("Close the door\n")
 LCD_cmd(cursorOff);\
 LCD_WriteString("IDLE state");\
 Bluetooth_SendString("IDLE state\n")
+
 
 /*!
  * @fn      Switches_Init
